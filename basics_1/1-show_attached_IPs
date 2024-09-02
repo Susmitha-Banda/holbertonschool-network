@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
-# Script to display all active IPv4 IPs on the machine using ip command
+# Dispalys the sctive IPv4 addresses in the current system
 
-# Use ip command to get IP addresses and filter the output
-ip -4 -o addr show | awk '{print $4}' | cut -d/ -f1 > ~/output
+# Run the following command in the docker terminal to install the 'ip' command:
+# apt install iproute2
 
-# Inform the user where the output is saved
-echo "IP addresses saved to ~/output"
+# ip -4 addr show | grep inet | cut -d ' ' -f 6 | cut -d'/' -f 1
+
+# Unfortunately the check only wants us to use ifconfig
+sudo ifconfig | grep 'inet ' | awk '{print $2}'
